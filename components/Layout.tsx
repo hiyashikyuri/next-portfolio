@@ -3,14 +3,20 @@ import Head from "next/head";
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
-Router.onRouteChangeStart = url => {
+Router.events.on('routeChangeStart', (url) => {
     console.log(url);
     NProgress.start();
-};
+});
 
-Router.onRouteChangeComplete = () => NProgress.done();
+Router.events.on('routeChangeComplete', (url) => {
+    console.log(url);
+    NProgress.done();
+})
 
-Router.onRouteChangeError = () => NProgress.done();
+Router.events.on('routeChangeError', (url) => {
+    console.log(url);
+    NProgress.done();
+})
 
 export default ({ children, title }) => (
     <div className="root">
